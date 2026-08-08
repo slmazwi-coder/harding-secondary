@@ -1,31 +1,17 @@
-import React, { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
+import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'motion/react';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import { Link } from 'react-router-dom';
-import { SportResultBoard } from './SportResultBoard';
 
 const slides = [
-  {
-    url: "/Hero/hero1.jpg",
-    caption: "Excellence in Education"
-  },
-  {
-    url: "/Hero/hero2.jpg",
-    caption: "Empowering Students"
-  },
-  {
-    url: "/Hero/hero3.jpg",
-    caption: "Nurturing Future Leaders"
-  },
-  {
-    url: "/Hero/hero4.jpg",
-    caption: "Building Brighter Futures"
-  },
-  {
-    url: "/Hero/hero5.jpg",
-    caption: "Harding Secondary Pride"
-  },
+  { url: '/Hero/hero1.jpg', caption: 'Excellence in Education' },
+  { url: '/Hero/hero2.jpg', caption: 'Empowering Students' },
+  { url: '/Hero/hero3.jpg', caption: 'Nurturing Future Leaders' },
+  { url: '/Hero/hero4.jpg', caption: 'Building Brighter Futures' },
+  { url: '/Hero/hero5.jpg', caption: 'Harding Secondary Pride' },
 ];
+
+const PRIMARY = '#0B7C5C';
+const ACCENT = '#F5C518';
 
 export const Hero = () => {
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -33,102 +19,142 @@ export const Hero = () => {
   useEffect(() => {
     const timer = setInterval(() => {
       setCurrentIndex((prev) => (prev + 1) % slides.length);
-    }, 6000);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
   const next = () => setCurrentIndex((prev) => (prev + 1) % slides.length);
   const prev = () => setCurrentIndex((prev) => (prev - 1 + slides.length) % slides.length);
 
+  const slide = slides[currentIndex];
+
   return (
-    <div className="relative h-[650px] w-full overflow-hidden bg-school-primary">
+    <div className="relative h-[650px] w-full overflow-hidden" style={{ background: PRIMARY }}>
       <AnimatePresence mode="wait">
         <motion.div
           key={currentIndex}
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
+          initial={{ opacity: 0, scale: 1.03 }}
+          animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0 }}
-          transition={{ duration: 1.5 }}
+          transition={{ duration: 0.8, ease: 'easeOut' }}
           className="absolute inset-0"
         >
           <img
-            src={slides[currentIndex].url}
-            alt={slides[currentIndex].caption}
-            className="h-full w-full object-cover object-center opacity-40"
-            onError={(e) => { (e.target as HTMLImageElement).style.display = 'none'; }}
+            src={slide.url}
+            alt={slide.caption}
+            className="h-full w-full object-cover object-center"
+            style={{ opacity: 0.45 }}
           />
-          <div className="absolute bottom-20 left-0 right-0 text-center z-20">
-            <motion.p 
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              key={`caption-${currentIndex}`}
-              className="text-white/80 text-lg md:text-xl font-medium tracking-wide uppercase"
-            >
-              {slides[currentIndex].caption}
-            </motion.p>
-          </div>
+          <div
+            className="absolute inset-0"
+            style={{ background: `linear-gradient(to top, rgba(11,124,92,0.92) 0%, rgba(11,124,92,0.55) 45%, rgba(0,0,0,0.35) 100%)` }}
+          />
         </motion.div>
       </AnimatePresence>
 
-      <div className="absolute inset-0 flex items-center justify-between px-4 md:px-12">
-        {/* Left: School Name */}
-        <div className="flex flex-col items-start text-left text-white max-w-xl">
-          <motion.h1 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            className="text-4xl md:text-6xl font-bold mb-4 uppercase leading-tight"
-          >
-            Harding Secondary School
-          </motion.h1>
-          <motion.p 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.2 }}
-            className="text-xl md:text-2xl font-light italic mb-2"
-          >
-            "Porro Pergite — Ever Forward"
-          </motion.p>
+      {/* Caption */}
+      <div className="absolute bottom-24 left-0 right-0 text-center z-20 px-4">
+        <AnimatePresence mode="wait">
           <motion.p
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.3 }}
-            className="text-sm text-green-100 font-medium tracking-widest uppercase"
+            key={`caption-${currentIndex}`}
+            initial={{ opacity: 0, y: 8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.35 }}
+            className="text-base md:text-lg font-medium tracking-widest uppercase"
+            style={{ color: 'rgba(245,197,24,0.85)' }}
           >
-            KwaZulu-Natal | Kirk Street, Harding
+            {slide.caption}
           </motion.p>
-          <motion.div 
-            initial={{ y: 20, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ delay: 0.4 }}
-            className="mt-6 flex gap-4"
-          >
-            <Link to="/admissions" className="btn-primary bg-white text-school-primary hover:bg-gray-100">
-              Admissions 2027
-            </Link>
-            <Link to="/about" className="btn-primary border-2 border-white bg-transparent hover:bg-white/10">
-              Learn More
-            </Link>
-          </motion.div>
-        </div>
-
-        {/* Right: Sport Result Board */}
-        <div className="hidden lg:block">
-          <SportResultBoard />
-        </div>
+        </AnimatePresence>
       </div>
 
-      <button onClick={prev} className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors z-30">
+      {/* Main content */}
+      <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-4 z-10">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.9 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="mb-5"
+        >
+          <img
+            src="/Logo/logo.png"
+            alt="Harding Secondary School crest"
+            className="w-20 h-20 md:w-24 md:h-24 rounded-2xl object-cover shadow-2xl mx-auto bg-white"
+            style={{ border: `3px solid ${ACCENT}` }}
+            onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
+          />
+        </motion.div>
+
+        <motion.h1
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.1 }}
+          className="text-4xl md:text-6xl font-extrabold mb-3 uppercase tracking-wider"
+          style={{ color: ACCENT }}
+        >
+          Harding Secondary School
+        </motion.h1>
+
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.18 }}
+          className="text-base md:text-xl font-light italic mb-8"
+          style={{ color: 'rgba(245,197,24,0.8)' }}
+        >
+          "Porro Pergite — Ever Forward"
+        </motion.p>
+
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, delay: 0.26 }}
+          className="flex gap-4 flex-wrap justify-center"
+        >
+          <a
+            href="/admissions"
+            className="px-7 py-3 font-bold transition-all rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5"
+            style={{ background: ACCENT, color: PRIMARY }}
+          >
+            Apply Now
+          </a>
+          <a
+            href="/about"
+            className="px-7 py-3 font-bold transition-all rounded-lg hover:-translate-y-0.5"
+            style={{ border: `2px solid ${ACCENT}`, color: ACCENT, background: 'transparent' }}
+          >
+            About Us
+          </a>
+        </motion.div>
+      </div>
+
+      {/* Arrows */}
+      <button
+        onClick={prev}
+        className="absolute left-4 top-1/2 -translate-y-1/2 p-2 rounded-full z-20 transition-all hover:scale-110"
+        style={{ background: 'rgba(245,197,24,0.2)', color: ACCENT }}
+        aria-label="Previous"
+      >
         <ChevronLeft size={32} />
       </button>
-      <button onClick={next} className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full bg-black/20 text-white hover:bg-black/40 transition-colors z-30">
+      <button
+        onClick={next}
+        className="absolute right-4 top-1/2 -translate-y-1/2 p-2 rounded-full z-20 transition-all hover:scale-110"
+        style={{ background: 'rgba(245,197,24,0.2)', color: ACCENT }}
+        aria-label="Next"
+      >
         <ChevronRight size={32} />
       </button>
 
-      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-30">
+      {/* Dots */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex gap-2 z-30 flex-wrap justify-center max-w-xs">
         {slides.map((_, i) => (
-          <div 
-            key={i} 
-            className={`h-2 w-2 rounded-full transition-colors ${i === currentIndex ? 'bg-white' : 'bg-white/40'}`}
+          <button
+            key={i}
+            onClick={() => setCurrentIndex(i)}
+            className="h-2 w-2 rounded-full transition-all"
+            style={{ background: i === currentIndex ? ACCENT : 'rgba(245,197,24,0.3)' }}
           />
         ))}
       </div>
