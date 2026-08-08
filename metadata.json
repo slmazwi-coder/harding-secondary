@@ -1,0 +1,7 @@
+{
+  "name": "Harding Secondary School",
+  "description": "Harding Secondary School — Porro Pergite — Ever Forward",
+  "requestFramePermissions": [
+    "geolocation"
+  ]
+}
