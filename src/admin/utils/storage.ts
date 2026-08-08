@@ -1,5 +1,12 @@
 // Storage utility — localStorage wrapper (swap with Supabase later)
 
+// ── Cache-buster: if stored data version doesn't match, clear stale school data ──
+const SCHOOL_DATA_VERSION = 'harding-v1';
+if (localStorage.getItem('school_data_version') !== SCHOOL_DATA_VERSION) {
+  ['admin_about', 'admin_contact', 'admin_news', 'admin_staff', 'admin_payments'].forEach(k => localStorage.removeItem(k));
+  localStorage.setItem('school_data_version', SCHOOL_DATA_VERSION);
+}
+
 export interface NewsItem {
   id: string;
   title: string;
@@ -32,6 +39,7 @@ export interface Application {
   previousSchool: string;
   status: 'Pending' | 'Reviewed' | 'Accepted' | 'Rejected';
   submittedDate: string;
+  studentNumber?: string;
 }
 
 export interface ContactInfo {
@@ -327,9 +335,83 @@ export interface Invoice {
   description: string;
   dueDate: string;
   createdDate: string;
-  status: string;
+  status: 'Pending' | 'Paid' | 'Overdue';
+  method?: string;
   popFile: string;
   popDate: string;
 }
 export const getInvoices = () => getItems<Invoice>('admin_invoices');
 export const setInvoices = (items: Invoice[]) => setItems('admin_invoices', items);
+
+// Payments (parent-initiated fee payments)
+export interface Payment {
+  id: string;
+  studentName: string;
+  studentGrade: string;
+  parentName: string;
+  parentEmail: string;
+  parentPhone: string;
+  amount: number;
+  method: 'EFT' | 'Cash' | 'Card' | 'Other';
+  reference: string;
+  description: string;
+  status: 'Pending' | 'Confirmed' | 'Rejected';
+  createdDate: string;
+  popFile: string;
+  popDate: string;
+}
+export const getPayments = () => getItems<Payment>('admin_payments');
+export const setPayments = (items: Payment[]) => setItems('admin_payments', items);
+
+// Student documents for the student portal
+export interface StudentDoc {
+  id: string;
+  studentNumber: string;
+  title: string;
+  category: string;
+  year: string;
+  term?: string;
+  fileName: string;
+  fileUrl: string;
+  createdAt: string;
+}
+function getStudentDocKey(studentNumber: string) {
+  return `harding_student_docs_${studentNumber.trim().toLowerCase()}`;
+}
+export const getStudentDocs = (studentNumber: string): StudentDoc[] => {
+  try {
+    const raw = localStorage.getItem(getStudentDocKey(studentNumber));
+    return raw ? JSON.parse(raw) : [];
+  } catch { return []; }
+};
+export const setStudentDocs = (studentNumber: string, docs: StudentDoc[]) => {
+  localStorage.setItem(getStudentDocKey(studentNumber), JSON.stringify(docs));
+};
+
+// Staff directory
+export interface StaffMember {
+  name: string;
+  position: string;
+  subject?: string;
+  categories: string[];
+  image?: string;
+  imgPosition?: string;
+  classTeacherFor?: string;
+  supportOrder?: number;
+  departmentHead?: string;
+}
+const defaultStaff: StaffMember[] = [
+  { name: 'TE Laurence', position: 'Principal', categories: ['School Management'] },
+  { name: 'Deputy Principal (TBC)', position: 'Deputy Principal', categories: ['School Management'] },
+];
+export const getStaff = () => getItems<StaffMember>('admin_staff').length ? getItems<StaffMember>('admin_staff') : defaultStaff;
+export const setStaff = (items: StaffMember[]) => setItems('admin_staff', items);
+
+// Student number generator: YEAR-000001, YEAR-000002, ...
+export function generateStudentNumber(year?: string): string {
+  const yr = year || new Date().getFullYear().toString();
+  const key = `harding_student_counter_${yr}`;
+  const current = parseInt(localStorage.getItem(key) || '0', 10) + 1;
+  localStorage.setItem(key, current.toString());
+  return `${yr}-${current.toString().padStart(6, '0')}`;
+}

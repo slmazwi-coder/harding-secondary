@@ -14,6 +14,7 @@ const navLinks = [
   { name: 'Policy', path: '/school-policy' },
   { name: 'Admissions', path: '/admissions' },
   { name: 'Contact', path: '/contact' },
+  { name: 'Student Portal', path: '/student/login' },
 ];
 
 export const Navbar = () => {

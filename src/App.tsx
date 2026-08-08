@@ -13,6 +13,9 @@ import { Academic } from './pages/Academic';
 import { Sports } from './pages/Sports';
 import { Admissions } from './pages/Admissions';
 import { Contact } from './pages/Contact';
+import { Payment } from './pages/Payment';
+import { StudentLogin } from './pages/StudentLogin';
+import { StudentPortal } from './pages/StudentPortal';
 import { SchoolFees } from './pages/SchoolFees';
 import { SchoolPolicy } from './pages/SchoolPolicy';
 import { Chatbot } from './components/Chatbot';
@@ -30,6 +33,9 @@ import { AcademicEditor } from './admin/editors/AcademicEditor';
 import { SportsEditor } from './admin/editors/SportsEditor';
 import { ApplicationsEditor } from './admin/editors/ApplicationsEditor';
 import { ContactEditor } from './admin/editors/ContactEditor';
+import { StaffEditor } from './admin/editors/StaffEditor';
+import { PaymentsEditor } from './admin/editors/PaymentsEditor';
+import { StudentDocsEditor } from './admin/editors/StudentDocsEditor';
 
 const HomePage = () => (
   <>
@@ -54,7 +60,12 @@ export default function App() {
         <Route path="/admissions" element={<><Navbar /><main className="flex-grow"><Admissions /></main><Footer /></>} />
         <Route path="/contact" element={<><Navbar /><main className="flex-grow"><Contact /></main><Footer /></>} />
         <Route path="/school-fees" element={<><Navbar /><main className="flex-grow"><SchoolFees /></main><Footer /></>} />
+        <Route path="/payment" element={<><Navbar /><main className="flex-grow"><Payment /></main><Footer /></>} />
         <Route path="/school-policy" element={<><Navbar /><main className="flex-grow"><SchoolPolicy /></main><Footer /></>} />
+
+        {/* Student portal routes */}
+        <Route path="/student/login" element={<StudentLogin />} />
+        <Route path="/student" element={<StudentPortal />} />
 
         {/* Admin routes */}
         <Route path="/admin/login" element={<AdminLogin />} />
@@ -67,6 +78,9 @@ export default function App() {
           <Route path="academic" element={<AcademicEditor />} />
           <Route path="sports" element={<SportsEditor />} />
           <Route path="applications" element={<ApplicationsEditor />} />
+          <Route path="staff" element={<StaffEditor />} />
+          <Route path="payments" element={<PaymentsEditor />} />
+          <Route path="student-documents" element={<StudentDocsEditor />} />
           <Route path="contact" element={<ContactEditor />} />
         </Route>
       </Routes>

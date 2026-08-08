@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Newspaper, Info, Trophy, FileText, Activity, Users, Phone } from 'lucide-react';
+import { Newspaper, Info, Trophy, FileText, Activity, Users, Phone, User, DollarSign, FolderUp } from 'lucide-react';
 
 const cards = [
   { label: 'News', desc: 'Add, edit, or remove news articles', icon: Newspaper, path: '/admin/news', color: 'bg-green-600' },
@@ -10,6 +10,9 @@ const cards = [
   { label: 'Academic', desc: 'Manage debate, spelling bee, etc.', icon: Activity, path: '/admin/academic', color: 'bg-orange-600' },
   { label: 'Sports', desc: 'Manage sport codes & Hall of Fame', icon: Trophy, path: '/admin/sports', color: 'bg-green-600' },
   { label: 'Applications', desc: 'Review student applications', icon: Users, path: '/admin/applications', color: 'bg-red-600' },
+  { label: 'Staff', desc: 'Update staff directory', icon: User, path: '/admin/staff', color: 'bg-blue-600' },
+  { label: 'Payments', desc: 'Confirm fee & registration payments', icon: DollarSign, path: '/admin/payments', color: 'bg-pink-600' },
+  { label: 'Student Docs', desc: 'Upload reports for the student portal', icon: FolderUp, path: '/admin/student-documents', color: 'bg-indigo-600' },
   { label: 'Contact', desc: 'Update contact information', icon: Phone, path: '/admin/contact', color: 'bg-teal-600' },
 ];
 

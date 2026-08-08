@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { motion } from 'motion/react';
-import { CreditCard, ShieldCheck, Download, Printer, Upload, CheckCircle2, User, Building, Info, FileCheck } from 'lucide-react';
+import { CreditCard, ShieldCheck, Download, Printer, Upload, CheckCircle2, User, Building, Info, FileCheck, ArrowRight } from 'lucide-react';
 import { generateId, setInvoices, getInvoices, type Invoice } from '../admin/utils/storage';
 
 export const SchoolFees = () => {
@@ -55,8 +55,17 @@ export const SchoolFees = () => {
   return (
     <div className="py-20 bg-gray-50 min-h-screen">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="section-title">School Fee Management</h1>
-        
+        <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4 mb-4">
+          <h1 className="section-title">School Fee Management</h1>
+          <a
+            href="/payment"
+            className="inline-flex items-center justify-center gap-2 bg-school-primary hover:bg-green-800 text-white px-6 py-3 rounded-2xl font-bold uppercase tracking-wider transition-all shadow-lg"
+          >
+            Easy Payment Portal <ArrowRight size={18} />
+          </a>
+        </div>
+        <p className="text-gray-600 mb-10">Generate an invoice below, or use the <a href="/payment" className="text-school-primary font-bold underline">Easy Payment Portal</a> to record a payment directly.</p>
+
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Instructions & Banking */}
           <div className="lg:col-span-1 space-y-8">

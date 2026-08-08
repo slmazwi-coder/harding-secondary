@@ -1,40 +1,29 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import { User } from 'lucide-react';
-
-interface StaffMember {
-  name: string;
-  position: string;
-  subject?: string;
-  categories: string[];
-  image?: string;
-  imgPosition?: string;
-  departmentHead?: string;
-}
+import { getStaff, type StaffMember } from '../admin/utils/storage';
 
 const PRIMARY = '#0B7C5C';
 const ACCENT = '#F5C518';
 
-const staffData: StaffMember[] = [
-  {
-    name: 'TE Laurence',
-    position: 'Principal',
-    categories: ['School Management'],
-    image: '',
-  },
-  {
-    name: 'Deputy Principal',
-    position: 'Deputy Principal (TBC)',
-    categories: ['School Management'],
-    image: '',
-  },
-];
+const streamIndex: Record<string, number> = { A: 0, B: 1, C: 2 };
+
+function classOrder(cls?: string): number {
+  if (!cls) return -1;
+  const grade = parseInt(cls, 10);
+  const stream = cls.replace(/^\d+/, '');
+  const streamRank = streamIndex[stream] ?? 9;
+  return grade * 10 + streamRank;
+}
 
 const categories = ['School Management', 'Class Teachers', 'Subject Teachers', 'Support Staff'];
 
 const StaffCard = ({ member, activeCategory }: { member: StaffMember; activeCategory: string }) => {
-  const positionLabel = React.useMemo(() => {
+  const positionLabel = useMemo(() => {
     if (activeCategory === 'School Management') {
       return member.departmentHead ? `Departmental Head — ${member.departmentHead}` : member.position;
+    }
+    if (activeCategory === 'Class Teachers') {
+      return member.classTeacherFor ? `Class Teacher — Grade ${member.classTeacherFor}` : member.position;
     }
     return activeCategory === 'Subject Teachers' ? member.subject : member.position;
   }, [member, activeCategory]);
@@ -82,14 +71,49 @@ const StaffCard = ({ member, activeCategory }: { member: StaffMember; activeCate
 };
 
 export const Staff = () => {
-  const [activeCategory, setActiveCategory] = React.useState('School Management');
-  const filtered = React.useMemo(() => staffData.filter(m => m.categories.includes(activeCategory)), [activeCategory]);
+  const [staffData, setStaffData] = useState<StaffMember[]>(getStaff());
+  const [activeCategory, setActiveCategory] = useState('School Management');
+
+  useEffect(() => {
+    setStaffData(getStaff());
+  }, []);
+
+  const filtered = useMemo(() => {
+    const list = staffData.filter(m => m.categories.includes(activeCategory));
+    if (activeCategory === 'Class Teachers') {
+      return [...list].sort((a, b) => classOrder(b.classTeacherFor) - classOrder(a.classTeacherFor));
+    }
+    if (activeCategory === 'Support Staff') {
+      return [...list].sort((a, b) => (a.supportOrder ?? 99) - (b.supportOrder ?? 99));
+    }
+    if (activeCategory === 'School Management') {
+      return [...list].sort((a, b) => {
+        const rank = (m: StaffMember) => {
+          if (m.position === 'Principal') return 0;
+          if (m.position?.includes('Deputy Principal')) return 1;
+          if (m.departmentHead) return 2;
+          return 3;
+        };
+        return rank(a) - rank(b);
+      });
+    }
+    if (activeCategory === 'Subject Teachers') {
+      return [...list].sort((a, b) => {
+        const rank = (m: StaffMember) => {
+          if (m.categories.includes('School Management')) return 0;
+          if (m.categories.includes('Class Teachers')) return 1;
+          return 2;
+        };
+        return rank(a) - rank(b) || a.name.localeCompare(b.name);
+      });
+    }
+    return list;
+  }, [staffData, activeCategory]);
 
   return (
     <div className="min-h-screen py-12 px-4" style={{ background: '#E6F7F1' }}>
       <div className="max-w-7xl mx-auto">
 
-        {/* Header */}
         <div className="text-center mb-10">
           <h1 className="text-4xl font-extrabold tracking-tight mb-3" style={{ color: PRIMARY }}>
             Our Staff
@@ -100,7 +124,6 @@ export const Staff = () => {
           </p>
         </div>
 
-        {/* Category Tabs */}
         <div className="flex flex-wrap justify-center gap-3 mb-10">
           {categories.map(cat => (
             <button
@@ -121,11 +144,10 @@ export const Staff = () => {
           ))}
         </div>
 
-        {/* Staff Grid */}
         {filtered.length === 0 ? (
           <div className="text-center py-16 text-gray-500">
             <p>Staff list for this category will be published soon.</p>
-            <p className="text-sm mt-2 opacity-70">Please check back later or contact the school office for the latest staff information.</p>
+            <p className="text-sm mt-2 opacity-70">Please check back later or contact the school office.</p>
           </div>
         ) : activeCategory === 'School Management' ? (
           <div className="flex flex-col items-center gap-5">

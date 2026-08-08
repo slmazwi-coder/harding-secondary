@@ -1,7 +1,10 @@
 import React from 'react';
 import { Link, Outlet, useLocation, useNavigate } from 'react-router-dom';
 import { logout } from './utils/storage';
-import { Newspaper, Info, Trophy, FileText, Activity, Users, Phone, LogOut, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import {
+  Newspaper, Info, Trophy, FileText, Activity, Users, Phone, LogOut,
+  LayoutDashboard, ShieldCheck, ArrowLeft, FolderUp, DollarSign, User,
+} from 'lucide-react';
 
 const adminTabs = [
   { path: '/admin', label: 'Dashboard', icon: LayoutDashboard },
@@ -12,6 +15,9 @@ const adminTabs = [
   { path: '/admin/academic', label: 'Academic', icon: Activity },
   { path: '/admin/sports', label: 'Sports', icon: Trophy },
   { path: '/admin/applications', label: 'Applications', icon: Users },
+  { path: '/admin/staff', label: 'Staff', icon: User },
+  { path: '/admin/payments', label: 'Payments', icon: DollarSign },
+  { path: '/admin/student-documents', label: 'Student Docs', icon: FolderUp },
   { path: '/admin/contact', label: 'Contact', icon: Phone },
 ];
 
@@ -24,18 +30,26 @@ export const AdminLayout = () => {
     navigate('/admin/login');
   };
 
+  const goBackToSite = () => navigate('/');
+
   return (
     <div className="min-h-screen bg-gray-900 text-white">
-      {/* Top Banner */}
       <div className="bg-red-600 text-white text-center py-1 text-xs font-bold uppercase tracking-widest">
         ⚙ Admin Mode — Changes affect the live website
       </div>
 
-      {/* Admin Navbar */}
       <nav className="bg-gray-800 border-b border-gray-700 sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4">
           <div className="flex items-center justify-between h-14">
             <div className="flex items-center gap-4">
+              <button
+                onClick={goBackToSite}
+                className="hidden sm:flex items-center gap-2 text-sm text-gray-300 hover:text-white transition-colors"
+                aria-label="Back to website"
+              >
+                <ArrowLeft size={16} /> Back
+              </button>
+
               <Link to="/admin" className="text-lg font-bold text-white flex items-center gap-2">
                 <span className="text-school-primary">HSS</span> Staff Portal
               </Link>
@@ -44,6 +58,7 @@ export const AdminLayout = () => {
                 Anti-Malicious Defense Active
               </div>
             </div>
+
             <div className="hidden md:flex items-center gap-1">
               {adminTabs.map((tab) => {
                 const Icon = tab.icon;
@@ -72,7 +87,7 @@ export const AdminLayout = () => {
             </button>
           </div>
         </div>
-        {/* Mobile tabs */}
+
         <div className="md:hidden overflow-x-auto px-2 pb-2 flex gap-1">
           {adminTabs.map((tab) => {
             const Icon = tab.icon;
@@ -83,7 +98,7 @@ export const AdminLayout = () => {
                 to={tab.path}
                 className={`flex items-center gap-1 px-3 py-1.5 rounded-lg text-xs whitespace-nowrap font-medium ${
                   isActive
-                    ? 'bg-school-green text-white'
+                    ? 'bg-school-primary text-white'
                     : 'text-gray-400 bg-gray-700'
                 }`}
               >
@@ -95,7 +110,6 @@ export const AdminLayout = () => {
         </div>
       </nav>
 
-      {/* Content */}
       <main className="max-w-7xl mx-auto px-4 py-8">
         <Outlet />
       </main>

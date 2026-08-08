@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { getApplications, setApplications, type Application } from '../utils/storage';
+import { getApplications, setApplications, generateStudentNumber, type Application } from '../utils/storage';
 import { generateApplicationPDF } from '../utils/generatePDF';
 import { Download, ChevronDown, Search, User } from 'lucide-react';
 
@@ -22,7 +22,14 @@ export const ApplicationsEditor = () => {
   );
 
   const updateStatus = (id: string, status: Application['status']) => {
-    const updated = apps.map(a => a.id === id ? { ...a, status } : a);
+    const updated = apps.map(a => {
+      if (a.id !== id) return a;
+      const next: Application = { ...a, status };
+      if (status === 'Accepted' && !next.studentNumber) {
+        next.studentNumber = generateStudentNumber();
+      }
+      return next;
+    });
     setApplications(updated);
     setApps(updated);
   };
@@ -87,6 +94,7 @@ export const ApplicationsEditor = () => {
                     <div><span className="text-gray-400">Phone:</span> <span className="text-white ml-2">{app.guardianPhone}</span></div>
                     <div><span className="text-gray-400">Email:</span> <span className="text-white ml-2">{app.guardianEmail}</span></div>
                     <div><span className="text-gray-400">Address:</span> <span className="text-white ml-2">{app.address}</span></div>
+                    {app.studentNumber && <div><span className="text-gray-400">Student Number:</span> <span className="text-white ml-2 font-bold">{app.studentNumber}</span></div>}
                   </div>
                   <div className="flex flex-wrap gap-2">
                     <select
