@@ -7,6 +7,7 @@ import { NewsSection } from './components/NewsSection';
 import { Home } from './pages/Home';
 import { About } from './pages/About';
 import { Staff } from './pages/Staff';
+import { News } from './pages/News';
 import { Documents } from './pages/Documents';
 import { Achievements } from './pages/Achievements';
 import { Academic } from './pages/Academic';
@@ -47,6 +48,7 @@ export default function App() {
         <Route path="/" element={<><Navbar /><main className="flex-grow"><HomePage /></main><Footer /></>} />
         <Route path="/about" element={<><Navbar /><main className="flex-grow"><About /></main><Footer /></>} />
         <Route path="/staff" element={<><Navbar /><main className="flex-grow"><Staff /></main><Footer /></>} />
+        <Route path="/news" element={<><Navbar /><main className="flex-grow"><News /></main><Footer /></>} />
         <Route path="/documents" element={<><Navbar /><main className="flex-grow"><Documents /></main><Footer /></>} />
         <Route path="/achievements" element={<><Navbar /><main className="flex-grow"><Achievements /></main><Footer /></>} />
         <Route path="/activities" element={<><Navbar /><main className="flex-grow"><Academic /></main><Footer /></>} />

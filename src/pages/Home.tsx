@@ -1,6 +1,6 @@
 import React from 'react';
 import { motion } from 'motion/react';
-import { Award, TrendingUp, Users } from 'lucide-react';
+import { Award, TrendingUp, Users, Megaphone, ArrowRight } from 'lucide-react';
 
 const stats = [
   { label: 'Matric Pass Rate', value: '87.5%', icon: TrendingUp },
@@ -11,8 +11,57 @@ const stats = [
 export const Home = () => {
   return (
     <div className="flex flex-col">
+      {/* Notices */}
+      <section className="py-10 sm:py-12 bg-white">
+        <div className="mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <div className="rounded-3xl border border-school-primary bg-school-secondary p-6 sm:p-7 flex gap-4 items-start">
+              <div className="p-3 rounded-2xl bg-white border border-school-primary text-school-primary shrink-0">
+                <Megaphone size={22} />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="text-sm font-black uppercase tracking-widest text-school-primary">Notice</div>
+                  <span className="px-2 py-1 rounded-full text-xs font-bold bg-white border border-school-primary text-gray-700">
+                    2027
+                  </span>
+                </div>
+                <h3 className="text-xl font-extrabold text-gray-900 mt-2">2027 Admissions are open</h3>
+                <p className="text-gray-700 mt-1">
+                  Grade 8 applications for the <span className="font-bold">2027</span> academic year are open. Apply online or download the form.
+                </p>
+                <a href="/admissions" className="mt-4 inline-flex items-center gap-2 text-school-primary font-bold">
+                  Apply now <ArrowRight size={18} />
+                </a>
+              </div>
+            </div>
+
+            <div className="rounded-3xl border border-gray-200 bg-gray-50 p-6 sm:p-7 flex gap-4 items-start">
+              <div className="p-3 rounded-2xl bg-white border border-gray-200 text-school-primary shrink-0">
+                <Megaphone size={22} />
+              </div>
+              <div className="min-w-0">
+                <div className="flex flex-wrap items-center gap-2">
+                  <div className="text-sm font-black uppercase tracking-widest text-school-primary">Info</div>
+                  <span className="px-2 py-1 rounded-full text-xs font-bold bg-white border border-gray-200 text-gray-700">
+                    School
+                  </span>
+                </div>
+                <h3 className="text-xl font-extrabold text-gray-900 mt-2">School Fees and Hostel Information</h3>
+                <p className="text-gray-700 mt-1">
+                  School fees for 2026 are R3 000 per annum. The registration fee of R1 500 must be paid before 31 December 2025.
+                </p>
+                <a href="/school-fees" className="mt-4 inline-flex items-center gap-2 text-school-primary font-bold">
+                  View fees <ArrowRight size={18} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Stats Quick View */}
-      <section className="py-12 bg-gray-50 -mt-10 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
+      <section className="py-12 bg-gray-50 mx-auto max-w-7xl w-full px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {stats.map((stat, i) => (
             <motion.div 
