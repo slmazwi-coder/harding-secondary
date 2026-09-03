@@ -32,7 +32,7 @@ jobs:
       - name: Deploy to public_html
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ${{ secrets.FTP_SERVER || '102.210.146.74' }}
+          server: 102.210.146.74
           username: github@hardingsecondary.co.za
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
@@ -45,7 +45,7 @@ jobs:
       - name: Deploy to private_html
         uses: SamKirkland/FTP-Deploy-Action@v4.4.0
         with:
-          server: ${{ secrets.FTP_SERVER || '102.210.146.74' }}
+          server: 102.210.146.74
           username: github@hardingsecondary.co.za
           password: ${{ secrets.FTP_PASSWORD }}
           protocol: ${{ secrets.FTP_PROTOCOL || 'ftps' }}
