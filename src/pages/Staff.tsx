@@ -5,7 +5,7 @@ import { getStaff, type StaffMember } from '../admin/utils/storage';
 const PRIMARY = '#0B7C5C';
 const ACCENT = '#F5C518';
 
-const streamIndex: Record<string, number> = { A: 0, B: 1, C: 2 };
+const streamIndex: Record<string, number> = { A: 0, B: 1, C: 2, D: 3, E: 4, F: 5, G: 6 };
 
 function classOrder(cls?: string): number {
   if (!cls) return -1;
@@ -58,6 +58,14 @@ const StaffCard = ({ member, activeCategory }: { member: StaffMember; activeCate
           {positionLabel}
         </p>
       )}
+      {activeCategory === 'Class Teachers' && member.room && (
+        <div
+          className="mt-3 w-full text-xs font-medium px-2 py-2 rounded-md text-center leading-tight"
+          style={{ background: '#E6F7F1', color: PRIMARY, border: `2px solid ${PRIMARY}` }}
+        >
+          Room {member.room}
+        </div>
+      )}
       {activeCategory === 'Subject Teachers' && member.subject && (
         <div
           className="mt-3 w-full text-xs font-medium px-2 py-2 rounded-md text-center leading-tight"
@@ -81,7 +89,7 @@ export const Staff = () => {
   const filtered = useMemo(() => {
     const list = staffData.filter(m => m.categories.includes(activeCategory));
     if (activeCategory === 'Class Teachers') {
-      return [...list].sort((a, b) => classOrder(b.classTeacherFor) - classOrder(a.classTeacherFor));
+      return [...list].sort((a, b) => classOrder(a.classTeacherFor) - classOrder(b.classTeacherFor));
     }
     if (activeCategory === 'Support Staff') {
       return [...list].sort((a, b) => (a.supportOrder ?? 99) - (b.supportOrder ?? 99));
