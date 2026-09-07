@@ -1,23 +1,37 @@
 import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'motion/react';
-import { Trophy, Music, BookOpen, Mic, Star } from 'lucide-react';
-import { getAcademicActivities, type Activity } from '../admin/utils/storage';
+import { motion } from 'motion/react';
+import { Music, BookOpen, Mic, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { getAcademicActivities, subjectStreams, type Activity, type SubjectStream } from '../admin/utils/storage';
 
-const ActivityCard: React.FC<{ activity: Activity }> = ({ activity }) => (
-  <motion.div 
-    layout
+const StreamCard: React.FC<{ stream: SubjectStream }> = ({ stream }) => (
+  <motion.div
     initial={{ opacity: 0, y: 20 }}
-    animate={{ opacity: 1, y: 0 }}
-    exit={{ opacity: 0, y: -20 }}
-    transition={{ duration: 0.3 }}
-    className="bg-white p-5 rounded-xl shadow-sm border border-gray-100 flex items-center justify-between"
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden flex flex-col"
   >
-    <div>
-      <h4 className="font-bold text-lg">{activity.name}</h4>
-      <p className="text-gray-500 text-sm">{activity.category} • {activity.description}</p>
+    <div className="bg-school-primary text-white px-6 py-4 flex items-center justify-between">
+      <h3 className="text-xl font-bold">{stream.name}</h3>
+      <span className="text-xs font-semibold uppercase tracking-wider bg-white/20 px-2 py-1 rounded-full">{stream.classLabel}</span>
     </div>
-    <div className="p-2 bg-yellow-50 text-yellow-600 rounded-lg shrink-0">
-      <Trophy size={20} />
+    <div className="p-6 flex-1 flex flex-col gap-5">
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Compulsory</p>
+        <ul className="space-y-1.5">
+          {stream.compulsory.map(s => (
+            <li key={s} className="flex items-start gap-2 text-gray-700 text-sm"><CheckCircle2 size={16} className="text-school-primary shrink-0 mt-0.5" />{s}</li>
+          ))}
+        </ul>
+      </div>
+      <div>
+        <p className="text-xs font-bold uppercase tracking-wider text-gray-500 mb-2">Stream Subjects</p>
+        <ul className="space-y-1.5">
+          {stream.electives.map(s => (
+            <li key={s} className="flex items-start gap-2 text-gray-900 font-medium text-sm"><CheckCircle2 size={16} className="text-yellow-500 shrink-0 mt-0.5" />{s}</li>
+          ))}
+        </ul>
+      </div>
+      {stream.note && <p className="text-xs text-gray-500 italic border-t border-gray-100 pt-3 mt-auto">{stream.note}</p>}
     </div>
   </motion.div>
 );
@@ -61,30 +75,33 @@ export const Academic = () => {
   return (
     <div className="py-16 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="section-title text-center">Academic & Cultural Activities</h1>
+        <h1 className="section-title text-center">Academics</h1>
         
         <p className="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
-          At Harding Secondary School, we believe in a holistic education. Our academic programs are designed to discover and nurture the diverse talents of our learners.
+          Harding Secondary School offers Grades 8 to 12. Grades 8 and 9 (GET Phase) follow English Home Language and isiZulu Home Language streams; from Grade 10 learners choose one of four National Senior Certificate subject packages.
         </p>
+
+        {/* Subject Streams */}
+        <section className="mb-24">
+          <h2 className="text-3xl font-bold text-school-primary mb-3 flex items-center gap-3 justify-center">
+            <GraduationCap /> Grade 10–12 Subject Packages (2027)
+          </h2>
+          <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
+            Every learner takes seven subjects: two languages, Life Orientation, Mathematics or Mathematical Literacy, plus the three subjects of their chosen stream.
+          </p>
+          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
+            {subjectStreams.map(s => <StreamCard key={s.id} stream={s} />)}
+          </div>
+        </section>
+
+        <h2 className="text-3xl font-bold text-school-primary mb-8 flex items-center gap-3 justify-center">
+          <BookOpen /> Subjects & Cultural Activities
+        </h2>
 
         {/* Academic & Culture */}
         <section className="mb-16">
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
             {activities.map((prog, i) => <ProgramCard key={i} prog={prog} />)}
-          </div>
-        </section>
-
-        {/* Accolades */}
-        <section className="mb-24">
-          <h2 className="text-3xl font-bold text-school-primary mb-8 flex items-center gap-3 justify-center">
-            <Trophy className="text-yellow-600" /> Recent Academic Accolades
-          </h2>
-          <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
-            <AnimatePresence mode="popLayout">
-              {activities.map((activity) => (
-                <ActivityCard key={activity.id} activity={activity} />
-              ))}
-            </AnimatePresence>
           </div>
         </section>
 

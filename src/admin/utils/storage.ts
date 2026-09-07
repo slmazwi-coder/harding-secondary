@@ -1,9 +1,9 @@
 // Storage utility — localStorage wrapper (swap with Supabase later)
 
 // ── Cache-buster: if stored data version doesn't match, clear stale school data ──
-const SCHOOL_DATA_VERSION = 'harding-v1';
+const SCHOOL_DATA_VERSION = 'harding-v2';
 if (localStorage.getItem('school_data_version') !== SCHOOL_DATA_VERSION) {
-  ['admin_about', 'admin_contact', 'admin_news', 'admin_staff', 'admin_payments'].forEach(k => localStorage.removeItem(k));
+  ['admin_about', 'admin_contact', 'admin_news', 'admin_staff', 'admin_payments', 'admin_sports', 'admin_academic'].forEach(k => localStorage.removeItem(k));
   localStorage.setItem('school_data_version', SCHOOL_DATA_VERSION);
 }
 
@@ -132,23 +132,37 @@ export function generateId(): string {
 const defaultNews: NewsItem[] = [
   {
     id: '1',
-    title: "2027 Admissions Open",
-    date: "August 2026",
-    content: "Applications for the 2027 academic year are now open. Visit the Admissions portal to register and learn about the R1 500 registration fee and R3 000 annual school fees.",
+    title: "School Closes for Term 3",
+    date: "23 September 2026",
+    content: "School closes for Term 3 on Wednesday, 23 September 2026. We wish all learners and families a safe and restful break.",
     image: ""
   },
   {
     id: '2',
-    title: "2026 Term 1 Re-opening",
-    date: "December 2025",
-    content: "School re-opens on 12 January 2026 for educators and 14 January 2026 for learners. The 2026 school fees are R3 000 per annum, payable into the school's FNB account.",
+    title: "School Reopens for Term 4",
+    date: "6 October 2026",
+    content: "School reopens for Term 4 on Tuesday, 6 October 2026. Learners are expected to arrive on time and in full school uniform.",
     image: ""
   },
   {
     id: '3',
-    title: "Important 2026 Term 1 Dates",
-    date: "December 2025",
-    content: "Awards Day 23 Jan, Valentine's Celebration 14 Feb, Cross Country 20 Feb, Road Relay 25 Feb, Inter-House Sports Day 27 Feb, Career Day 10 Mar and Matric Farewell 10 Apr.",
+    title: "Annual General Meeting (AGM)",
+    date: "11 October 2026",
+    content: "The school's Annual General Meeting will be held on 11 October 2026. All parents and guardians are encouraged to attend.",
+    image: ""
+  },
+  {
+    id: '4',
+    title: "2027 Admissions: Grade 8",
+    date: "1 April – 30 September",
+    content: "Applications for Grade 8 in 2027 are open from 1 April to 30 September. Grade 9 and 10 applications will be considered. Visit the Admissions page for the requirements.",
+    image: ""
+  },
+  {
+    id: '5',
+    title: "Fun Day & Fun Run",
+    date: "Dates to be announced",
+    content: "The school will be hosting a Fun Day and a Fun Run this term. Dates will be confirmed and shared with parents shortly.",
     image: ""
   }
 ];
@@ -165,11 +179,11 @@ export const setApplications = (items: Application[]) => setItems('admin_applica
 
 // Contact
 const defaultContact: ContactInfo = {
-  address: 'Kirk Street, Harding, 4680',
-  phone: '063 540 5901',
-  email: 'hardingsec@telkomsa.net',
-  monThu: '07:30 - 15:00',
-  friday: '07:30 - 13:00',
+  address: '1 Kirk Street, Harding, 4680',
+  phone: '082 505 3376',
+  email: 'secretary@hardingsecondary.co.za',
+  monThu: '07:30 - 16:00',
+  friday: '07:30 - 16:00',
   weekend: 'Closed',
 };
 export const getContact = () => getObject<ContactInfo>('admin_contact', defaultContact);
@@ -178,21 +192,27 @@ export const setContact = (info: ContactInfo) => setObject('admin_contact', info
 // About
 const defaultAbout: AboutInfo = {
   historyParagraphs: [
-    'Harding Secondary School is a public school in Harding, KwaZulu-Natal, serving the local community with a comprehensive curriculum for the senior phase and FET band. The school is situated on Kirk Street in the Umuziwabantu Local Municipality of the Ugu District.',
-    'Our motto, "Porro Pergite" — Ever Forward — guides our commitment to academic achievement, discipline and holistic learner development. We are proud of our green blazer tradition and the values that unite our learners and educators.',
-    'Under the leadership of Principal TE Laurence, Harding Secondary School continues to nurture a safe, disciplined environment where every learner can grow academically and personally. We currently serve over 1 200 learners with a dedicated team of educators.',
+    'Harding Secondary School has a rich history that reflects the changing social and political landscape of South Africa. The school began as a mission school during the apartheid era, when education was separated according to race, and catered specifically for Coloured learners. With the advent of democracy in 1994, the school opened its doors to learners from all racial and cultural backgrounds, becoming a truly diverse and inclusive institution.',
+    'Today, Harding Secondary School is a Quintile 4, Section 21 fee-paying, multicultural school situated at 1 Kirk Street in Harding, in the UGU District of KwaZulu-Natal, under the uMuziwabantu Local Municipality. Harding itself was established as a British military outpost in the 1870s and was named after Sir Walter Harding, the first Chief Justice of Natal.',
+    'The school offers Grades 8 to 12 with a range of National Senior Certificate (NSC) subjects across four subject streams, and provides both education and hostel facilities for boys and girls. It has continued to grow in learner numbers and staff capacity — today serving over 1 270 learners with 43 educators — while remaining committed to developing learners holistically: academically, socially and personally.',
+    'From its beginnings as a mission school serving a racially restricted community to its present role as a multicultural school in democratic South Africa, Harding Secondary School\'s history is one of transformation, inclusion and growth. Our motto, "Porro Pergite" — Ever Forward — guides everything we do.',
   ],
   principalName: 'TE Laurence',
   principalTitle: 'School Principal',
   principalMessage: [
-    'Welcome to Harding Secondary School. It is an honour to lead this vibrant school community in Harding, KwaZulu-Natal.',
-    'Together with our dedicated staff, we strive to uphold discipline, academic excellence and the values captured in our motto: Porro Pergite — Ever Forward.',
+    'Our school is committed to providing every learner with a safe, disciplined, supportive and academically focused environment in which they can develop and reach their full potential. We believe that education is a partnership between the school, learners, parents and the wider community, and that strong parent-teacher relationships are essential to the success and wellbeing of every learner.',
+    'We place great emphasis on good discipline, respect, responsibility and positive learner behaviour. Our aim is to create an environment where teaching and learning can take place effectively and where every learner understands the importance of respecting educators, fellow learners, school property and the values of our school. We encourage parents to work closely with the school in promoting good behaviour, regular attendance, punctuality, respect and a commitment to academic excellence.',
+    'Our school is proud to have qualified and dedicated educators who are committed to providing quality education and supporting learners in their academic development. We strive to maintain manageable class sizes, where possible, to enable meaningful teaching, learning and individual attention to learners.',
+    'As a Quintile 4, Section 21 fee-paying school, we are able to take greater responsibility for certain aspects of the management and development of the school. School fees play an important role in assisting us to maintain and improve educational resources, facilities and opportunities for our learners. We encourage all parents to fulfil their financial responsibilities towards the school, as this contributes directly to the continued provision of quality education.',
+    'We firmly believe that parents are their children\'s first and most important educators. For this reason, we encourage open communication and positive cooperation between parents and teachers. Parents are warmly invited to visit the school, engage with educators and become actively involved in the education and development of their children.',
+    'Our school also offers hostel accommodation for both boys and girls. The hostel provides learners with a structured and supportive environment, with appropriate supervision to promote their safety, wellbeing, discipline and academic development. We understand that a hostel becomes a home away from home for many learners, and we are committed to ensuring that learners are cared for in a safe, orderly and supportive environment under full supervision.',
+    'We remain committed to providing a school environment where learners can learn, grow and prepare themselves for a successful future. Together, as parents, educators and learners, we can make a meaningful difference in the lives and future of our children. We warmly welcome you to visit our school and become part of our school community.',
   ],
 };
 
 const defaultPolicy: PolicyInfo = {
   introduction: "Harding Secondary School is committed to creating a safe, disciplined environment that supports teaching, learning and the wellbeing of every learner.",
-  lastUpdated: "January 2026",
+  lastUpdated: "September 2026",
   sections: [
     { title: "Uniform & Dress Code", content: [
       "The green blazer is compulsory for all grades.",
@@ -216,19 +236,13 @@ const defaultPolicy: PolicyInfo = {
       "School fees for 2026 are R3 000 per annum.",
       "The registration fee of R1 500 must be paid before 31 December 2025 into the school's banking account. Non-payment will result in the learner not being issued textbooks and/or stationery.",
       "The on-site girls' hostel accommodates up to 200 girls. Hostel fees for 2026 are R3 000 per month, with a compulsory non-refundable R500 fee accompanying the first monthly payment.",
-      "No new boys will be enrolled at the hostel from January 2026 as enrolment is phased out.",
       "No learner with an outstanding 2025 balance will be allowed to return in 2026.",
     ]},
-    { title: "Important Term 1 Dates", content: [
-      "Educators return: 12 January 2026",
-      "Learners return: 14 January 2026",
-      "Awards Day: 23 January 2026",
-      "Valentine's Celebration: 14 February 2026",
-      "Cross Country: 20 February 2026",
-      "Road Relay: 25 February 2026",
-      "Annual Inter-House Sports Day: 27 February 2026",
-      "Career Day: 10 March 2026",
-      "Matric Farewell: 10 April 2026",
+    { title: "Important Dates", content: [
+      "School closes for Term 3: 23 September 2026",
+      "School reopens for Term 4: 6 October 2026",
+      "Annual General Meeting (AGM): 11 October 2026",
+      "Fun Day and Fun Run: dates to be announced",
     ]},
   ]
 };
@@ -240,21 +254,66 @@ export const setPolicy = (info: PolicyInfo) => setObject('admin_policy', info);
 
 // Academic Activities
 const defaultAcademic: Activity[] = [
-  { id: '1', name: 'isiZulu Home Language', category: 'Academic', description: 'Developing strong communication and literature skills in isiZulu.', image: '' },
-  { id: '2', name: 'English First Additional Language', category: 'Academic', description: 'Building English proficiency for further study and the world of work.', image: '' },
-  { id: '3', name: 'Mathematics & Mathematical Literacy', category: 'Academic', description: 'From problem solving and algebra to everyday numeracy and finance.', image: '' },
-  { id: '4', name: 'Physical Sciences', category: 'Academic', description: 'Physics and Chemistry for learners pursuing science and engineering paths.', image: '' },
-  { id: '5', name: 'Life Sciences', category: 'Academic', description: 'Exploring biology, ecology and human health through practical investigation.', image: '' },
-  { id: '6', name: 'Agricultural Sciences', category: 'Academic', description: 'Agricultural theory and practice rooted in the local context.', image: '' },
-  { id: '7', name: 'History', category: 'Academic', description: 'Understanding our past to shape informed, active citizens.', image: '' },
-  { id: '8', name: 'Geography', category: 'Academic', description: 'Physical and human geography, map skills and environmental awareness.', image: '' },
-  { id: '9', name: 'Business Studies', category: 'Academic', description: 'Entrepreneurship, management and the business environment.', image: '' },
-  { id: '10', name: 'Economics', category: 'Academic', description: 'Micro- and macro-economics, markets and policy.', image: '' },
-  { id: '11', name: 'Accounting', category: 'Academic', description: 'Financial literacy, bookkeeping and commercial accounting.', image: '' },
-  { id: '12', name: 'Life Orientation', category: 'Academic', description: 'Guidance on career, health, citizenship and personal development.', image: '' },
-  { id: '13', name: 'Choral Music', category: 'Culture', description: 'School choir and vocal ensembles performing at school and community events.', image: '' },
-  { id: '14', name: 'Drama & Public Speaking', category: 'Culture', description: 'Building confidence, expression and performance skills.', image: '' },
-  { id: '15', name: 'Debating', category: 'Culture', description: 'Developing critical thinking and eloquent argumentation.', image: '' },
+  { id: '1', name: 'English Home Language & FAL', category: 'Academic', description: 'English as Home Language or First Additional Language across Grades 8–12.', image: '' },
+  { id: '2', name: 'isiZulu Home Language & FAL', category: 'Academic', description: 'isiZulu as Home Language or First Additional Language; English HL and isiZulu HL streams from Grade 8.', image: '' },
+  { id: '3', name: 'Afrikaans First Additional Language', category: 'Academic', description: 'Afrikaans offered as a First Additional Language option.', image: '' },
+  { id: '4', name: 'Mathematics & Mathematical Literacy', category: 'Academic', description: 'Mathematics (60% term average required for the Sciences stream) or Mathematical Literacy.', image: '' },
+  { id: '5', name: 'Life Orientation', category: 'Academic', description: 'Compulsory in all grades: career guidance, health, citizenship and personal development.', image: '' },
+  { id: '6', name: 'Physical Sciences', category: 'Academic', description: 'Physics and Chemistry for learners in the Sciences stream.', image: '' },
+  { id: '7', name: 'Life Sciences', category: 'Academic', description: 'Biology, ecology and human health — Sciences and Humanities A streams.', image: '' },
+  { id: '8', name: 'Agricultural Sciences', category: 'Academic', description: 'Agricultural theory and practice rooted in the local context.', image: '' },
+  { id: '9', name: 'Geography', category: 'Academic', description: 'Physical and human geography, map skills and environmental awareness.', image: '' },
+  { id: '10', name: 'History', category: 'Academic', description: 'Understanding our past to shape informed, active citizens.', image: '' },
+  { id: '11', name: 'Accounting', category: 'Academic', description: 'Financial literacy, bookkeeping and commercial accounting — Commerce stream.', image: '' },
+  { id: '12', name: 'Business Studies', category: 'Academic', description: 'Entrepreneurship, management and the business environment.', image: '' },
+  { id: '13', name: 'Economics', category: 'Academic', description: 'Micro- and macro-economics, markets and policy.', image: '' },
+  { id: '14', name: 'Computer Applications Technology (CAT)', category: 'Academic', description: 'Practical computer skills and information management.', image: '' },
+  { id: '15', name: 'Consumer Studies', category: 'Academic', description: 'Food, nutrition, clothing and consumer rights — Humanities B stream.', image: '' },
+  { id: '16', name: 'Tourism', category: 'Academic', description: 'Tourism sectors, destinations and customer care — Humanities B stream.', image: '' },
+  { id: '17', name: 'Natural Sciences & Technology', category: 'Academic', description: 'Foundational science and technology in the GET Phase (Grades 8 & 9).', image: '' },
+  { id: '18', name: 'Music', category: 'Culture', description: 'Music and vocal performance at school and community events.', image: '' },
+  { id: '19', name: 'Chess Club', category: 'Culture', description: 'Strategy and critical thinking; learners compete at UGU district level.', image: '' },
+];
+
+// Subject streams (Grades 10–12)
+export interface SubjectStream {
+  id: string;
+  name: string;
+  classLabel: string;
+  compulsory: string[];
+  electives: string[];
+  note?: string;
+}
+export const subjectStreams: SubjectStream[] = [
+  {
+    id: 'sciences',
+    name: 'Sciences',
+    classLabel: 'Grade 10A',
+    compulsory: ['English (HL or FAL)', 'isiZulu (HL or FAL) or Afrikaans FAL', 'Life Orientation', 'Mathematics'],
+    electives: ['Physical Sciences', 'Life Sciences', 'Geography or Agricultural Sciences'],
+    note: 'A minimum of 60% in Mathematics in each term is required for the Sciences stream.',
+  },
+  {
+    id: 'commerce',
+    name: 'Commerce',
+    classLabel: 'Grade 10B',
+    compulsory: ['English (HL or FAL)', 'isiZulu (HL or FAL) or Afrikaans FAL', 'Life Orientation', 'Mathematics or Mathematical Literacy'],
+    electives: ['Accounting', 'Business Studies', 'Economics or Computer Applications Technology (CAT)'],
+  },
+  {
+    id: 'humanities-a',
+    name: 'Humanities A',
+    classLabel: 'Grade 10C',
+    compulsory: ['English (HL or FAL)', 'isiZulu (HL or FAL) or Afrikaans FAL', 'Life Orientation', 'Mathematical Literacy'],
+    electives: ['Geography', 'Agricultural Sciences or Life Sciences', 'History'],
+  },
+  {
+    id: 'humanities-b',
+    name: 'Humanities B',
+    classLabel: 'Grade 10D',
+    compulsory: ['English (HL or FAL)', 'isiZulu (HL or FAL) or Afrikaans FAL', 'Life Orientation', 'Mathematical Literacy'],
+    electives: ['History', 'Consumer Studies', 'Tourism'],
+  },
 ];
 export const getAcademicActivities = () => getItems<Activity>('admin_academic').length ? getItems<Activity>('admin_academic') : defaultAcademic;
 export const setAcademicActivities = (items: Activity[]) => setItems('admin_academic', items);
@@ -269,11 +328,30 @@ export interface Sport {
   hallOfFame: { name: string; achievement: string; image: string }[];
 }
 const defaultSports: Sport[] = [
-  { id: 's1', name: 'Soccer', image: '', description: 'Boys and girls soccer teams compete in local and district fixtures.', ageGroups: ['u/14', 'u/16', 'Open'], hallOfFame: [] },
-  { id: 's2', name: 'Netball', image: '', description: 'Fast-paced netball across junior and senior age groups.', ageGroups: ['u/14', 'u/16', 'Open'], hallOfFame: [] },
-  { id: 's3', name: 'Rugby', image: '', description: 'Rugby development from junior levels to the senior open team.', ageGroups: ['u/14', 'u/16', 'Open'], hallOfFame: [] },
-  { id: 's4', name: 'Cricket', image: '', description: 'Cricket coaching and friendly matches throughout the season.', ageGroups: ['u/14', 'u/16', 'Open'], hallOfFame: [] },
-  { id: 's5', name: 'Athletics', image: '', description: 'Track and field events preparing learners for inter-school competition.', ageGroups: ['u/14', 'u/16', 'Open'], hallOfFame: [] },
+  { id: 's1', name: 'Rugby', image: '', description: 'Winter season. Rugby development from U15 through to the U19 team, with learners selected for KZN provincial squads.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [
+    { name: 'Aluyolo Sigamla (Gr. 10)', achievement: 'U16 KZN Rugby', image: '' },
+    { name: 'Njabulo Mthembu (Gr. 10)', achievement: 'U15 KZN Rugby', image: '' },
+  ] },
+  { id: 's2', name: 'Soccer', image: '', description: 'Played all year round. Boys and girls teams compete in UGU district and KZN fixtures.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [
+    { name: 'Lwandile Khambule (Gr. 9)', achievement: 'U17 UGU & KZN Soccer', image: '' },
+    { name: 'Taygen Pandohe (Gr. 9)', achievement: 'U17 UGU Soccer', image: '' },
+    { name: 'Musawakhe Mpisi (Gr. 9)', achievement: 'U17 UGU Soccer', image: '' },
+  ] },
+  { id: 's3', name: 'Volleyball', image: '', description: 'Summer and winter seasons. Fast-paced volleyball across junior and senior age groups.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [
+    { name: 'Vuyokazi Miya (Gr. 9)', achievement: 'U17 KZN Volleyball', image: '' },
+    { name: 'Shehroz Tiwana (Gr. 8)', achievement: 'U15 UGU Volleyball & Chess', image: '' },
+  ] },
+  { id: 's4', name: 'Netball', image: '', description: 'Summer and winter seasons. Netball across all age groups with learners representing UGU and KZN.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [
+    { name: 'Bonolo Pakkies (Gr. 12)', achievement: 'U19 KZN Netball', image: '' },
+    { name: 'Mpho Pakkies (Gr. 9)', achievement: 'U16 UGU Netball', image: '' },
+  ] },
+  { id: 's5', name: 'Athletics', image: '', description: 'Summer season. Track and field events preparing learners for inter-school competition.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [] },
+  { id: 's6', name: 'Chess', image: '', description: 'Chess Club runs all year round, developing strategy and concentration.', ageGroups: ['U15', 'U17', 'U19'], hallOfFame: [
+    { name: 'Shehroz Tiwana (Gr. 8)', achievement: 'U15 UGU Chess', image: '' },
+  ] },
+  { id: 's7', name: 'Table Tennis', image: '', description: 'Played all year round at U15 level.', ageGroups: ['U15'], hallOfFame: [] },
+  { id: 's8', name: 'Hockey', image: '', description: 'Winter season hockey at U15 level.', ageGroups: ['U15'], hallOfFame: [] },
+  { id: 's9', name: 'Basketball', image: '', description: 'Summer season basketball for the U19 team.', ageGroups: ['U19'], hallOfFame: [] },
 ];
 export const getSports = () => getItems<Sport>('admin_sports').length ? getItems<Sport>('admin_sports') : defaultSports;
 export const setSports = (items: Sport[]) => setItems('admin_sports', items);
@@ -292,6 +370,14 @@ export const setHallOfFame = (items: HallOfFameEntry[]) => setItems('admin_hall_
 
 // Results by year
 const defaultResults: Record<string, YearResults> = {
+  "2025": {
+    overall: 85.1,
+    bachelor: 0,
+    bachelorRate: 0,
+    distinctions: 0,
+    wrote: 0,
+    subjects: []
+  },
   "2024": {
     overall: 87.5,
     bachelor: 0,
@@ -301,7 +387,7 @@ const defaultResults: Record<string, YearResults> = {
     subjects: []
   },
   "2023": {
-    overall: 91.3,
+    overall: 93.7,
     bachelor: 0,
     bachelorRate: 0,
     distinctions: 0,
@@ -402,7 +488,48 @@ export interface StaffMember {
 }
 const defaultStaff: StaffMember[] = [
   { name: 'TE Laurence', position: 'Principal', categories: ['School Management'] },
-  { name: 'Deputy Principal (TBC)', position: 'Deputy Principal', categories: ['School Management'] },
+  { name: 'AP Msizazwe', position: 'Deputy Principal', subject: 'Physical Sciences', categories: ['School Management', 'Subject Teachers'] },
+  { name: 'A Vally', position: 'Deputy Principal', subject: 'Natural Sciences', categories: ['School Management', 'Subject Teachers'] },
+{ name: 'LS Bishop', position: 'Departmental Head', subject: 'Mathematics', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Mathematics & Mathematical Literacy' },
+  { name: 'P Govender', position: 'Departmental Head', subject: 'Tourism', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Humanities' },
+  { name: 'M Jacobs', position: 'Departmental Head', subject: 'Afrikaans First Additional Language', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Languages' },
+  { name: 'SC Mkhize', position: 'Departmental Head', subject: 'Accounting', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Commerce' },
+  { name: 'NS Sigwebela', position: 'Departmental Head', subject: 'Life Sciences', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Sciences' },
+  { name: 'XP Dayi', position: 'Educator', subject: 'Computer Applications Technology', categories: ['Subject Teachers'] },
+  { name: 'PP Dickens', position: 'Educator', subject: 'English Home Language', categories: ['Subject Teachers'] },
+  { name: 'SE Dlamini', position: 'Educator', subject: 'Mathematical Literacy', categories: ['Subject Teachers'] },
+  { name: 'P Fundzo', position: 'Educator', subject: 'Life Sciences', categories: ['Subject Teachers'] },
+  { name: 'K Gana', position: 'Educator', subject: 'Tourism', categories: ['Subject Teachers'] },
+  { name: 'CB Grimett', position: 'Educator', subject: 'History', categories: ['Subject Teachers'] },
+  { name: 'AC Gumede', position: 'Educator', subject: 'Mathematical Literacy', categories: ['Subject Teachers'] },
+  { name: 'LH Kheswa', position: 'Educator', subject: 'Life Sciences', categories: ['Subject Teachers'] },
+  { name: 'M Lukhozi', position: 'Educator', subject: 'Life Orientation', categories: ['Subject Teachers'] },
+  { name: 'N Madikizela', position: 'Educator', subject: 'English First Additional Language', categories: ['Subject Teachers'] },
+  { name: 'LT Malishe', position: 'Educator', subject: 'Geography', categories: ['Subject Teachers'] },
+  { name: 'Y Mbuzi', position: 'Educator', subject: 'Mathematics', categories: ['Subject Teachers'] },
+  { name: 'BP Mdleko', position: 'Educator', subject: 'Mathematics', categories: ['Subject Teachers'] },
+  { name: 'A Mdunjane', position: 'Educator', subject: 'isiZulu First Additional Language', categories: ['Subject Teachers'] },
+  { name: 'A Mgcinwa', position: 'Educator', subject: 'Economics', categories: ['Subject Teachers'] },
+  { name: 'O Mgcwaba', position: 'Educator', subject: 'Physical Sciences', categories: ['Subject Teachers'] },
+  { name: 'NS Mhlongo', position: 'Educator', subject: 'Business Studies', categories: ['Subject Teachers'] },
+  { name: 'S Mjwara', position: 'Educator', subject: 'isiZulu First Additional Language', categories: ['Subject Teachers'] },
+  { name: 'S Mkhize', position: 'Educator', subject: 'Afrikaans First Additional Language', categories: ['Subject Teachers'] },
+  { name: 'A Mkize', position: 'Educator', subject: 'English Home Language', categories: ['Subject Teachers'] },
+  { name: 'AP Mlambo', position: 'Educator', subject: 'Geography', categories: ['Subject Teachers'] },
+  { name: 'M Mthembu', position: 'Educator', subject: 'History', categories: ['Subject Teachers'] },
+  { name: 'A Mtolo', position: 'Educator', subject: 'Afrikaans First Additional Language', categories: ['Subject Teachers'] },
+  { name: 'E Musariri', position: 'Educator', subject: 'Mathematical Literacy', categories: ['Subject Teachers'] },
+  { name: 'N Mvundla', position: 'Educator', subject: 'English Home Language', categories: ['Subject Teachers'] },
+  { name: 'B Ndabani', position: 'Educator', subject: 'Mathematics', categories: ['Subject Teachers'] },
+  { name: 'K Ndlwana', position: 'Educator', subject: 'Natural Sciences', categories: ['Subject Teachers'] },
+  { name: 'Mkonza-Grimett', position: 'Educator', subject: 'Life Orientation', categories: ['Subject Teachers'] },
+  { name: 'D Ntshangase', position: 'Educator', subject: 'Mathematics', categories: ['Subject Teachers'] },
+  { name: 'M Shabangu', position: 'Educator', subject: 'English Home Language', categories: ['Subject Teachers'] },
+  { name: 'MR Sikhosane', position: 'Educator', subject: 'isiZulu Home Language', categories: ['Subject Teachers'] },
+  { name: 'TA Swartling', position: 'Educator', subject: 'English Home Language', categories: ['Subject Teachers'] },
+  { name: 'P Wetshe', position: 'Educator', subject: 'Technology', categories: ['Subject Teachers'] },
+  { name: 'S Xaba', position: 'Educator', subject: 'Consumer Studies', categories: ['Subject Teachers'] },
+  { name: 'V Zithutha', position: 'Educator', subject: 'Business Studies', categories: ['Subject Teachers'] },
 ];
 export const getStaff = () => getItems<StaffMember>('admin_staff').length ? getItems<StaffMember>('admin_staff') : defaultStaff;
 export const setStaff = (items: StaffMember[]) => setItems('admin_staff', items);

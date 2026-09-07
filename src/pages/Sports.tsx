@@ -21,9 +21,12 @@ export const Sports = () => {
   return (
     <div className="py-16 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="section-title text-center">Sports Athletics</h1>
-        <p className="text-center text-xl text-gray-600 mb-12 max-w-3xl mx-auto">
-          Harding Secondary School has a proud sporting tradition. Our sports codes are organized across various age groups, ensuring development from junior levels to the Senior Team.
+        <h1 className="section-title text-center">Sports</h1>
+        <p className="text-center text-xl text-gray-600 mb-4 max-w-3xl mx-auto">
+          Harding Secondary School has a proud sporting tradition. Our sports codes are organised across the U15, U17 and U19 age groups, with learners regularly selected for UGU district and KZN provincial teams.
+        </p>
+        <p className="text-center text-sm text-gray-500 mb-12">
+          Sports Coordinators: JB Nkhonza-Grimett and B Mthembu
         </p>
 
         {/* Sport Selection Tabs */}
