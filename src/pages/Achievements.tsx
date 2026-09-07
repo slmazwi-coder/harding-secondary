@@ -3,8 +3,9 @@ import { motion, AnimatePresence } from 'motion/react';
 import { Trophy, Star, TrendingUp, BarChart3, Medal, Calendar, Award } from 'lucide-react';
 
 const matricResults = [
+  { year: '2025', pass: 85.1, note: 'National Senior Certificate pass rate.' },
   { year: '2024', pass: 87.5, note: 'National Senior Certificate pass rate.' },
-  { year: '2023', pass: 91.3, note: 'Highest recent recorded pass rate.' },
+  { year: '2023', pass: 93.7, note: 'Highest recent recorded pass rate.' },
 ];
 
 const awardImages = [
@@ -29,18 +30,18 @@ export const Achievements = () => {
             </div>
             <div className="relative z-10 flex flex-col md:flex-row items-center gap-10">
               <div className="w-40 h-40 bg-school-primary rounded-full flex flex-col items-center justify-center text-white border-8 border-white shadow-lg shrink-0">
-                <span className="text-3xl font-black">91.3%</span>
-                <span className="text-xs font-bold uppercase tracking-tighter italic text-center leading-tight mt-1">2023 Matric<br/>Pass Rate</span>
+                <span className="text-3xl font-black">85.1%</span>
+                <span className="text-xs font-bold uppercase tracking-tighter italic text-center leading-tight mt-1">2025 Matric<br/>Pass Rate</span>
               </div>
               <div>
                 <div className="flex items-center gap-2 text-school-primary font-bold uppercase tracking-widest text-sm mb-2">
                   <Star size={16} fill="currentColor" /> Recent Highlight <Star size={16} fill="currentColor" />
                 </div>
                 <h2 className="text-3xl md:text-5xl font-black text-school-primary mb-4">
-                  2023: 91.3% Pass Rate
+                  2025: 85.1% Pass Rate
                 </h2>
                 <p className="text-lg text-gray-700 max-w-2xl italic leading-relaxed">
-                  "Harding Secondary School continues to strive for strong academic outcomes. Our 2023 National Senior Certificate pass rate of 91.3% reflects the dedication of our learners and educators."
+                  "Harding Secondary School continues to strive for strong academic outcomes. Our 2025 National Senior Certificate pass rate of 85.1% — following 87.5% in 2024 and 93.7% in 2023 — reflects the dedication of our learners and educators."
                 </p>
               </div>
             </div>

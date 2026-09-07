@@ -117,7 +117,7 @@ export const Hero = () => {
             className="px-7 py-3 font-bold transition-all rounded-lg shadow-lg hover:shadow-xl hover:-translate-y-0.5"
             style={{ background: ACCENT, color: PRIMARY }}
           >
-            Apply Now
+            Admissions
           </a>
           <a
             href="/about"

@@ -27,8 +27,8 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Address</h3>
-                  <p className="text-gray-600">Kirk Street, Harding, 4680</p>
-                  <p className="text-gray-500 text-sm">Private Bag X1002, Harding, 4680</p>
+                  <p className="text-gray-600">{info.address}</p>
+                  <p className="text-gray-500 text-sm">Harding, KwaZulu-Natal</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -37,8 +37,7 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Phone</h3>
-                  <p className="text-gray-600">063 540 5901</p>
-                  <p className="text-gray-500 text-sm">082 505 3376 / 039 433 1223</p>
+                  <p className="text-gray-600">{info.phone}</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -47,8 +46,8 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h3 className="font-bold text-gray-900">Email</h3>
-                  <p className="text-gray-600">hardingsec@telkomsa.net</p>
-                  <p className="text-gray-500 text-sm">harding-ss@kznschools.gov.za</p>
+                  <p className="text-gray-600">{info.email}</p>
+                  <p className="text-gray-500 text-sm">General enquiries &amp; admissions</p>
                 </div>
               </div>
               <div className="flex items-start gap-4">
@@ -57,8 +56,8 @@ export const Contact = () => {
                 </div>
                 <div>
                   <h4 className="font-bold text-lg">Office Hours</h4>
-                  <p className="text-gray-600">Monday - Thursday: {info.monThu}</p>
-                  <p className="text-gray-600">Friday: {info.friday}</p>
+                  <p className="text-gray-600">Monday - Friday: {info.monThu}</p>
+                  <p className="text-gray-600">Weekends: {info.weekend}</p>
                 </div>
               </div>
             </div>

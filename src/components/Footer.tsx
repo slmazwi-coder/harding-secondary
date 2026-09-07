@@ -1,6 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
-import { Phone, Mail, MapPin, Facebook, Twitter, Instagram } from 'lucide-react';
+import { Phone, Mail, MapPin, Facebook } from 'lucide-react';
 
 export const Footer = () => {
   return (
@@ -13,7 +13,7 @@ export const Footer = () => {
               "Porro Pergite — Ever Forward"
             </p>
             <div className="flex gap-4">
-              <a href="#" target="_blank" rel="noopener noreferrer" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Facebook size={20} /></a>
+              <a href="https://www.facebook.com/search/top?q=Harding%20Secondary%20School%20%26%20Hostel" target="_blank" rel="noopener noreferrer" aria-label="Harding Secondary School & Hostel on Facebook" className="p-2 bg-white/10 rounded-full hover:bg-white/20 transition-colors"><Facebook size={20} /></a>
             </div>
           </div>
 
@@ -22,19 +22,15 @@ export const Footer = () => {
             <ul className="space-y-4 text-green-100">
               <li className="flex items-start gap-3">
                 <MapPin className="shrink-0 mt-1" size={18} />
-                <span>Kirk Street, Harding, 4680</span>
+                <span>1 Kirk Street, Harding, 4680</span>
               </li>
               <li className="flex items-center gap-3">
                 <Phone size={18} />
-                <span>063 540 5901 / 082 505 3376</span>
+                <span>082 505 3376</span>
               </li>
               <li className="flex items-center gap-3">
                 <Mail size={18} />
-                <span>hardingsec@telkomsa.net</span>
-              </li>
-              <li className="flex items-center gap-3">
-                <Mail size={18} />
-                <span>harding-ss@kznschools.gov.za</span>
+                <span>secretary@hardingsecondary.co.za</span>
               </li>
             </ul>
           </div>
@@ -45,7 +41,7 @@ export const Footer = () => {
               <li><Link to="/about" className="hover:text-white transition-colors">About Our School</Link></li>
               <li><Link to="/school-fees" className="hover:text-white transition-colors">School Fees</Link></li>
               <li><Link to="/achievements" className="hover:text-white transition-colors">Hall of Fame</Link></li>
-              <li><Link to="/admissions" className="hover:text-white transition-colors">Apply Online</Link></li>
+              <li><Link to="/admissions" className="hover:text-white transition-colors">Admissions</Link></li>
               <li><Link to="/school-policy" className="hover:text-white transition-colors">School Policy</Link></li>
             </ul>
           </div>
@@ -53,12 +49,11 @@ export const Footer = () => {
           <div>
             <h4 className="text-lg font-bold mb-6 border-b border-white/20 pb-2">School Hours</h4>
             <ul className="space-y-3 text-green-100">
-              <li className="flex justify-between"><span>Mon - Thu:</span> <span>07:30 - 15:00</span></li>
-              <li className="flex justify-between"><span>Friday:</span> <span>07:30 - 13:00</span></li>
+              <li className="flex justify-between"><span>Mon - Fri:</span> <span>07:30 - 16:00</span></li>
               <li className="flex justify-between"><span>Sat - Sun:</span> <span>Closed</span></li>
             </ul>
             <div className="mt-6 pt-4 border-t border-white/10">
-              <p className="text-sm text-green-100">Private Bag X1002, Harding, 4680</p>
+              <p className="text-sm text-green-100">EMIS: 500 153846 | Quintile 4 (Fee Paying)</p>
             </div>
           </div>
         </div>

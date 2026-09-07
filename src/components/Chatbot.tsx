@@ -9,19 +9,39 @@ const faqs = [
   },
   { 
     keywords: ['admission', 'apply', 'enrol', 'register'], 
-    answer: 'Admissions for 2027 are now open. You can fill out the digital application form on our "Admissions" page. The registration fee of R1 500 is payable before 31 December 2025.' 
+    answer: 'Applications for Grade 8 are accepted from 1 April to 30 September each year (Grades 9 and 10 will be considered). Online applications are not available — collect a hard-copy application form from the school office at 1 Kirk Street. See the "Admissions" page for age limits and the documents you need to bring.' 
   },
   { 
-    keywords: ['holiday', 'calendar', 'term', 'closed', 'break'], 
-    answer: 'Educators return on 12 January 2026 and learners return on 14 January 2026. Important Term 1 dates include Awards Day on 23 January, Cross Country on 20 February, Inter-House Sports on 27 February and the Matric Farewell on 10 April.' 
+    keywords: ['holiday', 'calendar', 'term', 'closed', 'break', 'reopen', 'agm'], 
+    answer: 'School closes for Term 3 on 23 September 2026 and reopens for Term 4 on 6 October 2026. The Annual General Meeting is on 11 October 2026. Fun Day and Fun Run dates will be announced.' 
   },
   { 
-    keywords: ['contact', 'phone', 'call', 'email', 'address'], 
-    answer: 'You can reach us at 063 540 5901 (also 082 505 3376 / 039 433 1223) or email hardingsec@telkomsa.net or harding-ss@kznschools.gov.za. We are located at Kirk Street, Harding, 4680.' 
+    keywords: ['contact', 'phone', 'call', 'email', 'address', 'hours', 'open'], 
+    answer: 'You can reach us at 082 505 3376 or email secretary@hardingsecondary.co.za. We are located at 1 Kirk Street, Harding, 4680. Office hours are Monday to Friday, 07:30 to 16:00.' 
   },
   { 
-    keywords: ['principal', 'laurence', 'staff'], 
-    answer: 'Our School Principal is TE Laurence. The Deputy Principal and staff list will be updated as soon as official names are available.' 
+    keywords: ['principal', 'laurence', 'staff', 'deputy', 'teacher'], 
+    answer: 'Our School Principal is TE Laurence, supported by Deputy Principals AP Msizazwe and A Vally. The school has 43 educators — see the "Staff" page for the full list by department.' 
+  },
+  { 
+    keywords: ['subject', 'stream', 'science', 'commerce', 'humanities', 'academic', 'package'], 
+    answer: 'From Grade 10 learners choose one of four streams: Sciences (Mathematics, Physical Sciences, Life Sciences, Geography or Agricultural Sciences), Commerce (Accounting, Business Studies, Economics or CAT), Humanities A (Geography, History, Agricultural or Life Sciences) or Humanities B (History, Consumer Studies, Tourism). Two languages and Life Orientation are compulsory.' 
+  },
+  { 
+    keywords: ['sport', 'rugby', 'soccer', 'netball', 'volleyball', 'chess', 'athletics', 'hockey', 'basketball', 'tennis'], 
+    answer: 'We offer Rugby, Soccer, Volleyball, Table Tennis, Netball, Athletics, Chess, Basketball and Hockey, mostly at U15, U17 and U19 level. Our sports coordinators are JB Nkhonza-Grimett and B Mthembu. Visit the "Sports" page for more.' 
+  },
+  { 
+    keywords: ['result', 'pass rate', 'matric', 'nsc'], 
+    answer: 'Our National Senior Certificate pass rates were 93.7% in 2023, 87.5% in 2024 and 85.1% in 2025.' 
+  },
+  { 
+    keywords: ['history', 'motto', 'vision', 'mission', 'value'], 
+    answer: 'Harding Secondary began as a mission school and opened to learners of all backgrounds in 1994. Our motto is "Porro Pergite — Ever Forward" and our values are Integrity, Caring, Respect, Diligence, Professionalism, Innovation and Dedication. Read more on the "About" page.' 
+  },
+  { 
+    keywords: ['hostel', 'boarding', 'accommodation'], 
+    answer: 'The school offers hostel accommodation for both boys and girls in a supervised, structured environment. Contact the office at 082 505 3376 for hostel enquiries.' 
   }
 ];
 
@@ -53,7 +73,7 @@ export const Chatbot = () => {
       
       const botResponse = match 
         ? match.answer 
-        : "I'm not exactly sure about that. Please contact the school office at 063 540 5901 for more details!";
+        : "I'm not exactly sure about that. Please contact the school office at 082 505 3376 or secretary@hardingsecondary.co.za for more details!";
       
       setMessages(prev => [...prev, { role: 'bot', text: botResponse }]);
     }, 600);

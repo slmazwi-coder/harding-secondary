@@ -3,9 +3,9 @@ import { motion } from 'motion/react';
 import { Award, TrendingUp, Users } from 'lucide-react';
 
 const stats = [
-  { label: 'Matric Pass Rate', value: '87.5%', icon: TrendingUp },
-  { label: 'Learners', value: '1 252', icon: Users },
-  { label: 'Educators', value: '41', icon: Award },
+  { label: '2025 Matric Pass Rate', value: '85.1%', icon: TrendingUp },
+  { label: 'Learners', value: '1 272', icon: Users },
+  { label: 'Educators', value: '43', icon: Award },
 ];
 
 export const Home = () => {
@@ -40,8 +40,18 @@ export const Home = () => {
         <div className="max-w-4xl mx-auto px-4 text-center">
           <h2 className="section-title">Our Vision</h2>
           <p className="text-2xl text-gray-700 leading-relaxed font-light italic">
-            "Porro Pergite — Ever Forward. We strive to develop disciplined, capable and responsible learners who positively shape their community and the world."
+            "To strive and provide access to holistic, affordable, quality, disciplined and goal directed education and life skills for our learners."
           </p>
+          <h2 className="section-title mt-16">Our Mission</h2>
+          <p className="text-2xl text-gray-700 leading-relaxed font-light italic">
+            "To provide a diverse, comprehensive, excellent learning that will develop, inspire and motivate learners in a safe, caring, nurturing environment."
+          </p>
+          <h2 className="section-title mt-16">Our Values</h2>
+          <div className="flex flex-wrap justify-center gap-3">
+            {['Integrity', 'Caring', 'Respect', 'Diligence', 'Professionalism', 'Innovation', 'Dedication'].map(v => (
+              <span key={v} className="px-5 py-2 rounded-full bg-green-50 text-school-primary font-semibold">{v}</span>
+            ))}
+          </div>
         </div>
       </section>
     </div>
