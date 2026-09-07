@@ -12,7 +12,7 @@ export const About = () => {
   const [principalFailed, setPrincipalFailed] = useState(false);
 
   const campusImageUrl = '/About/campus.jpg';
-  const principalImageUrl = '/assets/staff/principal.jpg';
+  const principalImageUrl = '/assets/staff/principal.jpg?v=2';
 
   useEffect(() => {
     setData(getAbout());
