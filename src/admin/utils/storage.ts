@@ -1,7 +1,7 @@
 // Storage utility — localStorage wrapper (swap with Supabase later)
 
 // ── Cache-buster: if stored data version doesn't match, clear stale school data ──
-const SCHOOL_DATA_VERSION = 'harding-v2';
+const SCHOOL_DATA_VERSION = 'harding-v3';
 if (localStorage.getItem('school_data_version') !== SCHOOL_DATA_VERSION) {
   ['admin_about', 'admin_contact', 'admin_news', 'admin_staff', 'admin_payments', 'admin_sports', 'admin_academic'].forEach(k => localStorage.removeItem(k));
   localStorage.setItem('school_data_version', SCHOOL_DATA_VERSION);
@@ -487,7 +487,7 @@ export interface StaffMember {
   departmentHead?: string;
 }
 const defaultStaff: StaffMember[] = [
-  { name: 'TE Laurence', position: 'Principal', categories: ['School Management'] },
+  { name: 'TE Laurence', position: 'Principal', categories: ['School Management'], image: '/assets/staff/principal.jpg' },
   { name: 'AP Msizazwe', position: 'Deputy Principal', subject: 'Physical Sciences', categories: ['School Management', 'Subject Teachers'] },
   { name: 'A Vally', position: 'Deputy Principal', subject: 'Natural Sciences', categories: ['School Management', 'Subject Teachers'] },
 { name: 'LS Bishop', position: 'Departmental Head', subject: 'Mathematics', categories: ['School Management', 'Subject Teachers'], departmentHead: 'Mathematics & Mathematical Literacy' },
