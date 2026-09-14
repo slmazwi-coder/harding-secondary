@@ -1,7 +1,17 @@
 import React, { useEffect, useState } from 'react';
 import { motion } from 'motion/react';
-import { Music, BookOpen, Mic, GraduationCap, CheckCircle2 } from 'lucide-react';
+import { Music, BookOpen, GraduationCap, CheckCircle2, Layers, Sparkles } from 'lucide-react';
 import { getAcademicActivities, subjectStreams, type Activity, type SubjectStream } from '../admin/utils/storage';
+
+const SectionHeading: React.FC<{ icon: React.ReactNode; title: string; subtitle?: string }> = ({ icon, title, subtitle }) => (
+  <div className="text-center mb-10">
+    <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-school-primary/10 text-school-primary mb-4">
+      {icon}
+    </div>
+    <h2 className="text-3xl font-bold text-gray-900">{title}</h2>
+    {subtitle && <p className="text-gray-600 mt-3 max-w-2xl mx-auto leading-relaxed">{subtitle}</p>}
+  </div>
+);
 
 const StreamCard: React.FC<{ stream: SubjectStream }> = ({ stream }) => (
   <motion.div
@@ -36,34 +46,36 @@ const StreamCard: React.FC<{ stream: SubjectStream }> = ({ stream }) => (
   </motion.div>
 );
 
-const ProgramCard: React.FC<{ prog: Activity }> = ({ prog }) => {
-  const Icon = prog.category === 'Culture' ? Music :
-               prog.name.toLowerCase().includes('debate') ? Mic : BookOpen;
-  
-  return (
-    <motion.div 
-      whileHover={{ y: -8 }}
-      className="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden group"
-    >
-      <div className="aspect-video bg-school-primary/10 flex items-center justify-center relative">
-        <Icon size={64} className="text-school-primary/40" />
-        <div className="absolute inset-0 bg-school-primary/80 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-          <Icon size={48} className="text-white" />
-        </div>
-      </div>
-      <div className="p-6">
-        <div className="flex items-center gap-2 mb-2">
-          <span className={`text-xs font-bold uppercase tracking-wider px-2 py-0.5 rounded-full ${
-            prog.category === 'Academic' ? 'bg-purple-100 text-purple-700' :
-            'bg-orange-100 text-orange-700'
-          }`}>{prog.category}</span>
-        </div>
-        <h3 className="text-xl font-bold text-gray-900 mb-2">{prog.name}</h3>
-        <p className="text-gray-600 text-sm leading-relaxed">{prog.description}</p>
-      </div>
-    </motion.div>
-  );
-};
+const SubjectCard: React.FC<{ item: Activity }> = ({ item }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 12 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true }}
+    whileHover={{ y: -4 }}
+    className="bg-white rounded-xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow p-5 flex gap-4"
+  >
+    <div className="w-10 h-10 rounded-lg bg-school-primary/10 text-school-primary flex items-center justify-center shrink-0">
+      {item.category === 'Culture' ? <Music size={20} /> : <BookOpen size={20} />}
+    </div>
+    <div className="min-w-0">
+      <h3 className="font-semibold text-gray-900 leading-snug">{item.name}</h3>
+      <p className="text-gray-600 text-sm leading-relaxed mt-1">{item.description}</p>
+    </div>
+  </motion.div>
+);
+
+const phases = [
+  {
+    label: 'Grades 8 – 9',
+    title: 'GET Phase',
+    text: 'Learners follow either the English Home Language or isiZulu Home Language stream, with a broad foundation across languages, Mathematics, Natural Sciences & Technology, Social Sciences and Life Orientation.',
+  },
+  {
+    label: 'Grades 10 – 12',
+    title: 'FET Phase',
+    text: 'Learners choose one of four National Senior Certificate subject packages — Sciences, Commerce, Humanities A or Humanities B — and take seven subjects through to Matric.',
+  },
+];
 
 export const Academic = () => {
   const [activities, setActivities] = useState<Activity[]>(getAcademicActivities());
@@ -72,39 +84,75 @@ export const Academic = () => {
     setActivities(getAcademicActivities());
   }, []);
 
+  const subjects = activities.filter(a => a.category !== 'Culture');
+  const cultural = activities.filter(a => a.category === 'Culture');
+
   return (
     <div className="py-16 bg-gray-50 min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="section-title text-center">Academics</h1>
-        
-        <p className="text-center text-xl text-gray-600 mb-16 max-w-3xl mx-auto">
-          Harding Secondary School offers Grades 8 to 12. Grades 8 and 9 (GET Phase) follow English Home Language and isiZulu Home Language streams; from Grade 10 learners choose one of four National Senior Certificate subject packages.
-        </p>
+        <div className="text-center max-w-3xl mx-auto mb-14">
+          <h1 className="section-title">Academics</h1>
+          <p className="text-lg text-gray-600 leading-relaxed">
+            Harding Secondary School offers Grades 8 to 12, guiding every learner from the General Education phase through to the National Senior Certificate.
+          </p>
+        </div>
+
+        {/* Phases */}
+        <section className="mb-24">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {phases.map(p => (
+              <motion.div
+                key={p.title}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="bg-white rounded-2xl shadow-lg border border-gray-100 p-8"
+              >
+                <span className="inline-block text-xs font-bold uppercase tracking-wider text-school-primary bg-school-primary/10 px-3 py-1 rounded-full mb-4">{p.label}</span>
+                <h3 className="text-2xl font-bold text-gray-900 mb-3">{p.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{p.text}</p>
+              </motion.div>
+            ))}
+          </div>
+        </section>
 
         {/* Subject Streams */}
         <section className="mb-24">
-          <h2 className="text-3xl font-bold text-school-primary mb-3 flex items-center gap-3 justify-center">
-            <GraduationCap /> Grade 10–12 Subject Packages (2027)
-          </h2>
-          <p className="text-center text-gray-600 mb-10 max-w-2xl mx-auto">
-            Every learner takes seven subjects: two languages, Life Orientation, Mathematics or Mathematical Literacy, plus the three subjects of their chosen stream.
-          </p>
+          <SectionHeading
+            icon={<GraduationCap />}
+            title="Grade 10 – 12 Subject Packages"
+            subtitle="Every learner takes seven subjects: two languages, Life Orientation, Mathematics or Mathematical Literacy, plus the three subjects of their chosen stream."
+          />
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
             {subjectStreams.map(s => <StreamCard key={s.id} stream={s} />)}
           </div>
         </section>
 
-        <h2 className="text-3xl font-bold text-school-primary mb-8 flex items-center gap-3 justify-center">
-          <BookOpen /> Subjects & Cultural Activities
-        </h2>
-
-        {/* Academic & Culture */}
-        <section className="mb-16">
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {activities.map((prog, i) => <ProgramCard key={i} prog={prog} />)}
+        {/* Subjects */}
+        <section className="mb-24">
+          <SectionHeading
+            icon={<Layers />}
+            title="Subjects Offered"
+            subtitle="The full range of subjects taught across Grades 8 to 12."
+          />
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+            {subjects.map(item => <SubjectCard key={item.id} item={item} />)}
           </div>
         </section>
 
+        {/* Cultural */}
+        {cultural.length > 0 && (
+          <section className="mb-16">
+            <SectionHeading
+              icon={<Sparkles />}
+              title="Cultural Activities"
+              subtitle="Enrichment beyond the classroom."
+            />
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 max-w-4xl mx-auto">
+              {cultural.map(item => <SubjectCard key={item.id} item={item} />)}
+            </div>
+          </section>
+        )}
       </div>
     </div>
   );

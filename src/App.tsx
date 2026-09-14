@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { Navbar } from './components/Navbar';
 import { Footer } from './components/Footer';
 import { Hero } from './components/Hero';
@@ -57,7 +57,8 @@ export default function App() {
         <Route path="/news" element={<><Navbar /><main className="flex-grow"><News /></main><Footer /></>} />
         <Route path="/documents" element={<><Navbar /><main className="flex-grow"><Documents /></main><Footer /></>} />
         <Route path="/achievements" element={<><Navbar /><main className="flex-grow"><Achievements /></main><Footer /></>} />
-        <Route path="/activities" element={<><Navbar /><main className="flex-grow"><Academic /></main><Footer /></>} />
+        <Route path="/academics" element={<><Navbar /><main className="flex-grow"><Academic /></main><Footer /></>} />
+        <Route path="/activities" element={<Navigate to="/academics" replace />} />
         <Route path="/sports" element={<><Navbar /><main className="flex-grow"><Sports /></main><Footer /></>} />
         <Route path="/admissions" element={<><Navbar /><main className="flex-grow"><Admissions /></main><Footer /></>} />
         <Route path="/contact" element={<><Navbar /><main className="flex-grow"><Contact /></main><Footer /></>} />
