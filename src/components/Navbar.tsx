@@ -9,7 +9,7 @@ const navLinks = [
   { name: 'Staff', path: '/staff' },
   { name: 'News & Notices', path: '/news' },
   { name: 'Achievements', path: '/achievements' },
-  { name: 'Activities', path: '/activities' },
+  { name: 'Academics', path: '/academics' },
   { name: 'Sports', path: '/sports' },
   { name: 'School Fees', path: '/school-fees' },
   { name: 'Policy', path: '/school-policy' },

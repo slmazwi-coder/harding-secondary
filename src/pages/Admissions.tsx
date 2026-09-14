@@ -108,7 +108,7 @@ export const Admissions = () => {
               </div>
               <p className="mt-4 text-sm text-gray-600">
                 See the <Link to="/school-fees" className="text-school-primary font-semibold hover:underline">School Fees</Link> page for fee information and the{' '}
-                <Link to="/activities" className="text-school-primary font-semibold hover:underline">Academics</Link> page for the Grade 10–12 subject packages.
+                <Link to="/academics" className="text-school-primary font-semibold hover:underline">Academics</Link> page for the Grade 10–12 subject packages.
               </p>
             </section>
           </div>
