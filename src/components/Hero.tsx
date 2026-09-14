@@ -45,7 +45,7 @@ export const Hero = () => {
             className="h-full w-full object-cover object-center"
           />
           <div
-            className="absolute inset-x-0 top-0 h-40 pointer-events-none"
+            className="absolute inset-x-0 top-0 h-64 pointer-events-none"
             style={{ background: 'linear-gradient(to bottom, rgba(0,0,0,0.55), rgba(0,0,0,0))' }}
           />
           <div
@@ -61,7 +61,7 @@ export const Hero = () => {
           initial={{ opacity: 0, y: -8 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-xs md:text-sm font-bold uppercase tracking-[0.35em] mb-3 whitespace-nowrap"
+          className="text-sm md:text-2xl font-bold uppercase tracking-[0.2em] md:tracking-[0.3em] mb-4 whitespace-nowrap"
           style={{ color: ACCENT, textShadow: '0 1px 6px rgba(0,0,0,0.7)' }}
         >
           Harding Secondary School
@@ -72,8 +72,8 @@ export const Hero = () => {
           transition={{ duration: 0.5, ease: 'easeOut', delay: 0.1 }}
           src="/Logo/logo.png"
           alt="Harding Secondary School crest"
-          className="w-14 h-14 md:w-16 md:h-16 rounded-xl object-cover shadow-2xl bg-white"
-          style={{ border: `2px solid ${ACCENT}` }}
+          className="w-24 h-24 md:w-36 md:h-36 rounded-2xl object-cover shadow-2xl bg-white"
+          style={{ border: `3px solid ${ACCENT}` }}
           onError={(e) => { (e.currentTarget as HTMLImageElement).style.display = 'none'; }}
         />
       </div>
