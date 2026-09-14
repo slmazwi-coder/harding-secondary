@@ -17,7 +17,7 @@ const faqs = [
   },
   { 
     keywords: ['contact', 'phone', 'call', 'email', 'address', 'hours', 'open'], 
-    answer: 'You can reach us at 082 505 3376 or email secretary@hardingsecondary.co.za. We are located at 1 Kirk Street, Harding, 4680. Office hours are Monday to Friday, 07:30 to 16:00.' 
+    answer: 'You can reach us at 082 505 3376 or email secretary@hardingsecondary.co.za. We are located at 1 Kirk Street, Harding, 4680. The school day runs Monday to Friday, 07:30 to 14:45.' 
   },
   { 
     keywords: ['principal', 'laurence', 'staff', 'deputy', 'teacher'], 

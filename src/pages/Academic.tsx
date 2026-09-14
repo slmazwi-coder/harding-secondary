@@ -68,7 +68,7 @@ const phases = [
   {
     label: 'Grades 8 – 9',
     title: 'GET Phase',
-    text: 'Learners follow either the English Home Language or isiZulu Home Language stream, with a broad foundation across languages, Mathematics, Natural Sciences & Technology, Social Sciences and Life Orientation.',
+    text: 'Learners follow the English Home Language stream, or the isiZulu Home Language (with English FAL) stream — introduced in Grade 8 in 2026 and extending to Grade 9 in 2027 — with a broad foundation across languages, Mathematics, Natural Sciences & Technology, Social Sciences and Life Orientation.',
   },
   {
     label: 'Grades 10 – 12',
