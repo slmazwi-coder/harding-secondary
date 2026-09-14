@@ -1,7 +1,7 @@
 // Storage utility — localStorage wrapper (swap with Supabase later)
 
 // ── Cache-buster: if stored data version doesn't match, clear stale school data ──
-const SCHOOL_DATA_VERSION = 'harding-v5';
+const SCHOOL_DATA_VERSION = 'harding-v6';
 if (localStorage.getItem('school_data_version') !== SCHOOL_DATA_VERSION) {
   ['admin_about', 'admin_contact', 'admin_news', 'admin_staff', 'admin_payments', 'admin_sports', 'admin_academic'].forEach(k => localStorage.removeItem(k));
   localStorage.setItem('school_data_version', SCHOOL_DATA_VERSION);
@@ -182,8 +182,8 @@ const defaultContact: ContactInfo = {
   address: '1 Kirk Street, Harding, 4680',
   phone: '082 505 3376',
   email: 'secretary@hardingsecondary.co.za',
-  monThu: '07:30 - 16:00',
-  friday: '07:30 - 16:00',
+  monThu: '07:30 - 14:45',
+  friday: '07:30 - 14:45',
   weekend: 'Closed',
 };
 export const getContact = () => getObject<ContactInfo>('admin_contact', defaultContact);
@@ -254,8 +254,8 @@ export const setPolicy = (info: PolicyInfo) => setObject('admin_policy', info);
 
 // Academic Activities
 const defaultAcademic: Activity[] = [
-  { id: '1', name: 'English Home Language & FAL', category: 'Academic', description: 'English as Home Language or First Additional Language across Grades 8–12.', image: '' },
-  { id: '2', name: 'isiZulu Home Language & FAL', category: 'Academic', description: 'isiZulu as Home Language or First Additional Language; English HL and isiZulu HL streams from Grade 8.', image: '' },
+  { id: '1', name: 'English Home Language & FAL', category: 'Academic', description: 'English Home Language across Grades 8–12. English First Additional Language is offered in Grade 8 in 2026 and extends to Grade 9 in 2027.', image: '' },
+  { id: '2', name: 'isiZulu Home Language & FAL', category: 'Academic', description: 'isiZulu First Additional Language across Grades 8–12. The isiZulu Home Language stream is offered in Grade 8 in 2026 and extends to Grade 9 in 2027.', image: '' },
   { id: '3', name: 'Afrikaans First Additional Language', category: 'Academic', description: 'Afrikaans offered as a First Additional Language option.', image: '' },
   { id: '4', name: 'Mathematics & Mathematical Literacy', category: 'Academic', description: 'Mathematics (60% term average required for the Sciences stream) or Mathematical Literacy.', image: '' },
   { id: '5', name: 'Life Orientation', category: 'Academic', description: 'Compulsory in all grades: career guidance, health, citizenship and personal development.', image: '' },
